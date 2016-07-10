@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="DSRdbModelStoreContainer" CdmEntityContainer="DSRdbEntities">
+    <EntitySetMapping Name="Projects">
+      <EntityTypeMapping TypeName="DSRdbModel.Project">
+        <MappingFragment StoreEntitySet="Project">
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="PlnSrtDate" ColumnName="PlnSrtDate" />
+          <ScalarProperty Name="ActSrtDate" ColumnName="ActSrtDate" />
+          <ScalarProperty Name="PlnEndDate" ColumnName="PlnEndDate" />
+          <ScalarProperty Name="ActEndDate" ColumnName="ActEndDate" />
+          <ScalarProperty Name="ProjectDL" ColumnName="ProjectDL" />
+          <ScalarProperty Name="PM" ColumnName="PM" />
+          <ScalarProperty Name="LastDSR" ColumnName="LastDSR" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectPhases">
+      <EntityTypeMapping TypeName="DSRdbModel.ProjectPhase">
+        <MappingFragment StoreEntitySet="ProjectPhase">
+          <ScalarProperty Name="PhaseID" ColumnName="PhaseID" />
+          <ScalarProperty Name="DsrId" ColumnName="DsrId" />
+          <ScalarProperty Name="PhaseName" ColumnName="PhaseName" />
+          <ScalarProperty Name="PlnSrtDate" ColumnName="PlnSrtDate" />
+          <ScalarProperty Name="ActSrtDate" ColumnName="ActSrtDate" />
+          <ScalarProperty Name="PlnEndDate" ColumnName="PlnEndDate" />
+          <ScalarProperty Name="ActEndDate" ColumnName="ActEndDate" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="DSRMasters">
+      <EntityTypeMapping TypeName="DSRdbModel.DSRMaster">
+        <MappingFragment StoreEntitySet="DSRMaster">
+          <ScalarProperty Name="OpenItem" ColumnName="OpenItem" />
+          <ScalarProperty Name="Risk" ColumnName="Risk" />
+          <ScalarProperty Name="Issue" ColumnName="Issue" />
+          <ScalarProperty Name="SentBy" ColumnName="SentBy" />
+          <ScalarProperty Name="Status" ColumnName="Status" />
+          <ScalarProperty Name="DSRDate" ColumnName="DSRDate" />
+          <ScalarProperty Name="CurrentPhase" ColumnName="CurrentPhase" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="DSRId" ColumnName="DSRId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

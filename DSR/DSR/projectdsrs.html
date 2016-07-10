@@ -1,0 +1,40 @@
+﻿<!--dsrController-->
+<!--//this view is to display all the DSR sent-->
+<script type="text/javascript-lazy">
+    $(function () {
+        $("#inputPlnStartDate").datepicker();
+        $("#inputPlnEndDate").datepicker();
+        $("#inputActStartDate").datepicker();
+        $("#inputActEndDate").datepicker();
+    });
+</script>
+<div ng-controller="projectDsrsController">
+    <h3>{{title}}</h3>
+    <!--<h3>{{DsrProject.project.projectId}}</h3>-->
+                        <a href="#/sendnewdsr/{{projectId}}" class="btn btn-primary"> Send New DSR </a>
+    <br /><br /><br />
+
+    <table cellspacing="0" class="table table-condensed  table-bordered table-hover" id="phaseTable" style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <th>DSR ID</th>
+            <th scope="col">Project Status</th>
+            <th scope="col">Sent By</th>
+            <th scope="col">Last DSR Date</th>
+        </tr>
+      
+        <tr ng-repeat="dsr in DsrProject.dsrList">
+            <!--<td style="width: 40px;">1</td>-->
+            <td >
+                 <a href="#/browseDsr/{{dsr.dsrId}}"> {{dsr.dsrId}}  </a>
+            </td>
+            
+            <td>{{dsr.projectStatus}}</td>
+            <td>{{dsr.dsrSentby}}</td>
+            <td>{{dsr.projectDSRLastDate}}
+            </td>
+        </tr>
+
+        
+        <!--end item display-->
+    </table>
+</div>

@@ -1,0 +1,54 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="DSRdbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="DSRdbEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Projects" EntityType="DSRdbModel.Project" />
+    <EntitySet Name="ProjectPhases" EntityType="DSRdbModel.ProjectPhase" />
+    <EntitySet Name="DSRMasters" EntityType="DSRdbModel.DSRMaster" />
+  </EntityContainer>
+  <EntityType Name="Project">
+    <Key>
+      <PropertyRef Name="ProjectID" />
+    </Key>
+    <Property Name="ProjectID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectName" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
+    <Property Name="PlnSrtDate" Type="DateTime" Precision="0" />
+    <Property Name="ActSrtDate" Type="DateTime" Precision="0" />
+    <Property Name="PlnEndDate" Type="DateTime" Precision="0" />
+    <Property Name="ActEndDate" Type="DateTime" Precision="0" />
+    <Property Name="ProjectDL" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="PM" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
+    <Property Name="LastDSR" Type="DateTime" Precision="0" />
+    <Property Name="CreatedBy" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="ProjectPhase">
+    <Key>
+      <PropertyRef Name="PhaseID" />
+    </Key>
+    <Property Name="PhaseID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
+    <Property Name="DsrId" Type="Int32" />
+    <Property Name="PhaseName" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="PlnSrtDate" Type="DateTime" Precision="0" />
+    <Property Name="ActSrtDate" Type="DateTime" Precision="0" />
+    <Property Name="PlnEndDate" Type="DateTime" Precision="0" />
+    <Property Name="ActEndDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
+    <Property Name="ModifiedBy" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="CreatedBy" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
+    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+  </EntityType>
+  <EntityType Name="DSRMaster">
+    <Key>
+      <PropertyRef Name="DSRId" />
+    </Key>
+    <Property Type="Int32" Name="DSRId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ProjectId" />
+    <Property Type="String" Name="CurrentPhase" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="DSRDate" Precision="0" />
+    <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SentBy" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Issue" />
+    <Property Type="Int32" Name="Risk" />
+    <Property Type="Int32" Name="OpenItem" />
+  </EntityType>
+</Schema>

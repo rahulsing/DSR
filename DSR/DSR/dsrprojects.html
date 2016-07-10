@@ -1,0 +1,90 @@
+﻿<!--dsrController-->
+
+<script type="text/javascript-lazy">
+    $(function () {
+        $("#inputPlnStartDate").datepicker();
+        $("#inputPlnEndDate").datepicker();
+        $("#inputActStartDate").datepicker();
+        $("#inputActEndDate").datepicker();
+    });
+</script>
+<div ng-controller="dsrProjectController">
+    <h3>{{title}}</h3>
+    <table cellspacing="0" class="table table-condensed  table-bordered table-hover" id="phaseTable" style="width: 100%; border-collapse: collapse;">
+        <tr>
+            <th>Project ID</th>
+            <th scope="col">Project Name</th>
+            <th scope="col">Pln. Start Dt.</th>
+            <th scope="col">Pl. End Dt.</th>
+            <th scope="col">Act. Start Dt.</th>
+            <th scope="col">Act. End Dt.</th>
+            <th scope="col">Project DL</th>
+            <th scope="col">Project PM</th>
+            <th scope="col">Last DSR Date</th>
+        </tr>
+      
+        <tr ng-repeat="project in projects">
+            <!--<td style="width: 40px;">1</td>-->
+            <td ><span>{{project.projectID}}</span></td>
+            <td>
+                <!-- <button type="button" class="btn btn-link" ng-click="openprojectdsrs(project.projectId)" > {{project.projectName}} </button> -->
+                 <a href="#/projectdsrs/{{project.projectID}}"> {{project.projectName}}  </a>
+            </td>
+            <td>{{project.plnSrtDate }}</td>
+            <td>{{project.plnEndDate}}
+            </td>
+            <td>{{project.pctSrtDate}}
+            </td>
+            <td>{{project.pctEndDate}}
+            </td>
+            <td>{{project.projectDL}}
+            </td>
+            <td>{{project.pm}}
+            </td>
+            <td>{{project.lastDSR}}
+            </td>
+            <td>
+                
+            </td>
+        </tr>
+
+        
+        <!--end item display-->
+    </table>
+
+    <br /><br /><br />
+    <table>
+            <tr>
+                <!--<td><input type="text" disabled="disabled" ng-model="projectPhaseid" /></td>-->
+                <td>
+                    <input name="inputPhase" type="text" id="inputPhase" ng-model="projectName" placeholder="projectName" class="form-control input-sm" />
+                </td>
+                <td>
+                    <input name="inputPlnStartDate" type="text" id="inputPlnStartDate"  placeholder="inputPlnStartDate" ng-model="projectPlnStartDate" class="form-control input-sm" />
+                </td>
+                <td>
+                    <input name="inputPlnEndDate" type="text" id="inputPlnEndDate"  placeholder="inputActStartDate" ng-model="projectPlnEndDate" class="form-control input-sm" />
+                </td>
+                <td>
+                    <input name="inputActStartDate" type="text" id="inputActStartDate"  placeholder="inputActStartDate" ng-model="projectActStartDate" class="form-control input-sm" />
+                </td>
+                <td>
+                    <input name="inputActEndDate" type="text" id="inputActEndDate"  placeholder="inputActEndDate" ng-model="projectActEndDate" class="form-control input-sm" />
+                </td>
+                <td>
+                    <input name="inputprojectDL" type="text" id="inputprojectDL"  placeholder="inputprojectDL" ng-model="projectDL" class="form-control input-sm" />
+                </td>
+                <td>
+                    <input name="inputprojecPM" type="text" id="inputprojecPM"  placeholder="inputprojecPM" ng-model="projecPM" class="form-control input-sm" />
+                </td>
+                <td>
+                    <!--<button ng-click="updatePhase()" class="btn btn-primary">
+                        <span class="glyphicon glyphicon-ok"></span>
+                    </button>-->
+                    <button ng-click="addPjoject()" class="btn btn-success">
+                        <span class="glyphicon glyphicon-plus-sign"></span>
+                    </button>
+                </td>
+        </tr>
+    </table>
+</div>
