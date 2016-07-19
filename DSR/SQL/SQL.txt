@@ -1,6 +1,39 @@
+USE [DSRdb]
+GO
+ALTER TABLE [dbo].[ProjectPhase] DROP CONSTRAINT [DF_ProjectPhase_CreatedDate]
+GO
+ALTER TABLE [dbo].[ProjectPhase] DROP CONSTRAINT [DF_ProjectPhase_ModifiedDate]
+GO
+ALTER TABLE [dbo].[Project] DROP CONSTRAINT [DF_Project_CreatedDate]
+GO
+ALTER TABLE [dbo].[AccomplishmentsHistory] DROP CONSTRAINT [DF_AccomplishmentsHistory_AddedDate]
+GO
+ALTER TABLE [dbo].[Accomplishments] DROP CONSTRAINT [DF_DSRActivity_AddedDate]
+GO
+/****** Object:  Table [dbo].[ProjectPhaseHistory]    Script Date: 19 Jul 2016 08:51:56 ******/
+DROP TABLE [dbo].[ProjectPhaseHistory]
+GO
+/****** Object:  Table [dbo].[ProjectPhase]    Script Date: 19 Jul 2016 08:51:56 ******/
+DROP TABLE [dbo].[ProjectPhase]
+GO
+/****** Object:  Table [dbo].[Project]    Script Date: 19 Jul 2016 08:51:56 ******/
+DROP TABLE [dbo].[Project]
+GO
+/****** Object:  Table [dbo].[DSRMaster]    Script Date: 19 Jul 2016 08:51:56 ******/
+DROP TABLE [dbo].[DSRMaster]
+GO
+/****** Object:  Table [dbo].[AccomplishmentsHistory]    Script Date: 19 Jul 2016 08:51:56 ******/
+DROP TABLE [dbo].[AccomplishmentsHistory]
+GO
+/****** Object:  Table [dbo].[Accomplishments]    Script Date: 19 Jul 2016 08:51:56 ******/
+DROP TABLE [dbo].[Accomplishments]
+GO
 USE [master]
 GO
-/****** Object:  Database [DSRdb]    Script Date: 11 Jul 2016 08:55:35 ******/
+/****** Object:  Database [DSRdb]    Script Date: 19 Jul 2016 08:51:56 ******/
+DROP DATABASE [DSRdb]
+GO
+/****** Object:  Database [DSRdb]    Script Date: 19 Jul 2016 08:51:56 ******/
 CREATE DATABASE [DSRdb]
  CONTAINMENT = NONE
  ON  PRIMARY 
@@ -75,7 +108,53 @@ ALTER DATABASE [DSRdb] SET TARGET_RECOVERY_TIME = 0 SECONDS
 GO
 USE [DSRdb]
 GO
-/****** Object:  Table [dbo].[DSRMaster]    Script Date: 11 Jul 2016 08:55:35 ******/
+/****** Object:  Table [dbo].[Accomplishments]    Script Date: 19 Jul 2016 08:51:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[Accomplishments](
+	[ActivityId] [int] IDENTITY(1,1) NOT NULL,
+	[ProjectId] [int] NULL,
+	[Activity] [varchar](500) NULL,
+	[ActivityDate] [date] NULL,
+	[AddedDate] [date] NULL,
+	[AddedBy] [varchar](50) NULL,
+ CONSTRAINT [PK_DSRActivity\] PRIMARY KEY CLUSTERED 
+(
+	[ActivityId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[AccomplishmentsHistory]    Script Date: 19 Jul 2016 08:51:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[AccomplishmentsHistory](
+	[ActivityId] [int] IDENTITY(1,1) NOT NULL,
+	[ProjectId] [int] NULL,
+	[Activity] [varchar](500) NULL,
+	[ActivityDate] [date] NULL,
+	[AddedDate] [date] NULL,
+	[AddedBy] [varchar](50) NULL,
+ CONSTRAINT [PK_AccomplishmentsHistory] PRIMARY KEY CLUSTERED 
+(
+	[ActivityId] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+/****** Object:  Table [dbo].[DSRMaster]    Script Date: 19 Jul 2016 08:51:57 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -86,22 +165,18 @@ CREATE TABLE [dbo].[DSRMaster](
 	[DSRId] [int] IDENTITY(1,1) NOT NULL,
 	[ProjectId] [int] NULL,
 	[CurrentPhase] [varchar](50) NULL,
-	[DSRDate] [date] NULL,
-	[Status] [varchar](50) NULL,
-	[SentBy] [varchar](50) NULL,
-	[Issue] [int] NULL,
-	[Risk] [int] NULL,
-	[OpenItem] [int] NULL,
- CONSTRAINT [PK_DSRMaster] PRIMARY KEY CLUSTERED 
-(
-	[DSRId] ASC
-)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+	[DSRDate] [date] NOT NULL,
+	[Status] [varchar](50) NOT NULL,
+	[SentBy] [varchar](50) NOT NULL,
+	[Issue] [int] NOT NULL,
+	[Risk] [int] NOT NULL,
+	[OpenItem] [int] NOT NULL
 ) ON [PRIMARY]
 
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[Project]    Script Date: 11 Jul 2016 08:55:35 ******/
+/****** Object:  Table [dbo].[Project]    Script Date: 19 Jul 2016 08:51:57 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -129,7 +204,7 @@ CREATE TABLE [dbo].[Project](
 GO
 SET ANSI_PADDING OFF
 GO
-/****** Object:  Table [dbo].[ProjectPhase]    Script Date: 11 Jul 2016 08:55:35 ******/
+/****** Object:  Table [dbo].[ProjectPhase]    Script Date: 19 Jul 2016 08:51:57 ******/
 SET ANSI_NULLS ON
 GO
 SET QUOTED_IDENTIFIER ON
@@ -138,12 +213,15 @@ SET ANSI_PADDING ON
 GO
 CREATE TABLE [dbo].[ProjectPhase](
 	[PhaseID] [int] IDENTITY(1,1) NOT NULL,
+	[ProjectId] [int] NULL,
 	[DsrId] [int] NULL,
 	[PhaseName] [varchar](150) NULL,
 	[PlnSrtDate] [date] NULL,
 	[ActSrtDate] [date] NULL,
 	[PlnEndDate] [date] NULL,
 	[ActEndDate] [date] NULL,
+	[CompletionPer] [decimal](18, 0) NULL,
+	[AuditStatus] [varchar](50) NULL,
 	[ModifiedDate] [date] NULL,
 	[ModifiedBy] [varchar](150) NULL,
 	[CreatedBy] [varchar](150) NULL,
@@ -157,7 +235,46 @@ CREATE TABLE [dbo].[ProjectPhase](
 GO
 SET ANSI_PADDING OFF
 GO
+/****** Object:  Table [dbo].[ProjectPhaseHistory]    Script Date: 19 Jul 2016 08:51:57 ******/
+SET ANSI_NULLS ON
+GO
+SET QUOTED_IDENTIFIER ON
+GO
+SET ANSI_PADDING ON
+GO
+CREATE TABLE [dbo].[ProjectPhaseHistory](
+	[PhaseID] [int] IDENTITY(1,1) NOT NULL,
+	[ProjectId] [int] NULL,
+	[DsrId] [int] NULL,
+	[PhaseName] [varchar](150) NULL,
+	[PlnSrtDate] [date] NULL,
+	[ActSrtDate] [date] NULL,
+	[PlnEndDate] [date] NULL,
+	[ActEndDate] [date] NULL,
+	[CompletionPer] [nchar](10) NULL,
+	[AuditStatus] [varchar](50) NULL,
+	[ModifiedDate] [date] NULL,
+	[ModifiedBy] [varchar](150) NULL,
+	[CreatedBy] [varchar](150) NULL,
+	[CreatedDate] [date] NULL,
+ CONSTRAINT [PK_ProjectPhaseHistory] PRIMARY KEY CLUSTERED 
+(
+	[PhaseID] ASC
+)WITH (PAD_INDEX = OFF, STATISTICS_NORECOMPUTE = OFF, IGNORE_DUP_KEY = OFF, ALLOW_ROW_LOCKS = ON, ALLOW_PAGE_LOCKS = ON) ON [PRIMARY]
+) ON [PRIMARY]
+
+GO
+SET ANSI_PADDING OFF
+GO
+ALTER TABLE [dbo].[Accomplishments] ADD  CONSTRAINT [DF_DSRActivity_AddedDate]  DEFAULT (getdate()) FOR [AddedDate]
+GO
+ALTER TABLE [dbo].[AccomplishmentsHistory] ADD  CONSTRAINT [DF_AccomplishmentsHistory_AddedDate]  DEFAULT (getdate()) FOR [AddedDate]
+GO
 ALTER TABLE [dbo].[Project] ADD  CONSTRAINT [DF_Project_CreatedDate]  DEFAULT (getdate()) FOR [CreatedDate]
+GO
+ALTER TABLE [dbo].[ProjectPhase] ADD  CONSTRAINT [DF_ProjectPhase_ModifiedDate]  DEFAULT (getdate()) FOR [ModifiedDate]
+GO
+ALTER TABLE [dbo].[ProjectPhase] ADD  CONSTRAINT [DF_ProjectPhase_CreatedDate]  DEFAULT (getdate()) FOR [CreatedDate]
 GO
 USE [master]
 GO
