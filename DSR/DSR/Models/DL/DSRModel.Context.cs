@@ -25,8 +25,11 @@ namespace DSR.Models.DL
             throw new UnintentionalCodeFirstException();
         }
     
+        public DbSet<Accomplishment> Accomplishments { get; set; }
+        public DbSet<AccomplishmentsHistory> AccomplishmentsHistories { get; set; }
         public DbSet<Project> Projects { get; set; }
         public DbSet<ProjectPhase> ProjectPhases { get; set; }
+        public DbSet<ProjectPhaseHistory> ProjectPhaseHistories { get; set; }
         public DbSet<DSRMaster> DSRMasters { get; set; }
     }
 }

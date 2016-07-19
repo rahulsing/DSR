@@ -1,10 +1,35 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DSRdbModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2008" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
   <EntityContainer Name="DSRdbModelStoreContainer">
+    <EntitySet Name="Accomplishments" EntityType="DSRdbModel.Store.Accomplishments" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="AccomplishmentsHistory" EntityType="DSRdbModel.Store.AccomplishmentsHistory" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="DSRMaster" EntityType="DSRdbModel.Store.DSRMaster" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="Project" EntityType="DSRdbModel.Store.Project" store:Type="Tables" Schema="dbo" />
     <EntitySet Name="ProjectPhase" EntityType="DSRdbModel.Store.ProjectPhase" store:Type="Tables" Schema="dbo" />
+    <EntitySet Name="ProjectPhaseHistory" EntityType="DSRdbModel.Store.ProjectPhaseHistory" store:Type="Tables" Schema="dbo" />
   </EntityContainer>
+  <EntityType Name="Accomplishments">
+    <Key>
+      <PropertyRef Name="ActivityId" />
+    </Key>
+    <Property Name="ActivityId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectId" Type="int" />
+    <Property Name="Activity" Type="varchar" MaxLength="500" />
+    <Property Name="ActivityDate" Type="date" />
+    <Property Name="AddedDate" Type="date" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+  </EntityType>
+  <EntityType Name="AccomplishmentsHistory">
+    <Key>
+      <PropertyRef Name="ActivityId" />
+    </Key>
+    <Property Name="ActivityId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectId" Type="int" />
+    <Property Name="Activity" Type="varchar" MaxLength="500" />
+    <Property Name="ActivityDate" Type="date" />
+    <Property Name="AddedDate" Type="date" />
+    <Property Name="AddedBy" Type="varchar" MaxLength="50" />
+  </EntityType>
   <EntityType Name="DSRMaster">
     <Key>
       <PropertyRef Name="DSRId" />
@@ -12,12 +37,12 @@
     <Property Name="DSRId" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
     <Property Name="ProjectId" Type="int" />
     <Property Name="CurrentPhase" Type="varchar" MaxLength="50" />
-    <Property Name="DSRDate" Type="date" />
-    <Property Name="Status" Type="varchar" MaxLength="50" />
-    <Property Name="SentBy" Type="varchar" MaxLength="50" />
-    <Property Name="Issue" Type="int" />
-    <Property Name="Risk" Type="int" />
-    <Property Name="OpenItem" Type="int" />
+    <Property Name="DSRDate" Type="date" Nullable="false" />
+    <Property Name="Status" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="SentBy" Type="varchar" Nullable="false" MaxLength="50" />
+    <Property Name="Issue" Type="int" Nullable="false" />
+    <Property Name="Risk" Type="int" Nullable="false" />
+    <Property Name="OpenItem" Type="int" Nullable="false" />
   </EntityType>
   <EntityType Name="Project">
     <Key>
@@ -40,12 +65,34 @@
       <PropertyRef Name="PhaseID" />
     </Key>
     <Property Name="PhaseID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectId" Type="int" />
     <Property Name="DsrId" Type="int" />
     <Property Name="PhaseName" Type="varchar" MaxLength="150" />
     <Property Name="PlnSrtDate" Type="date" />
     <Property Name="ActSrtDate" Type="date" />
     <Property Name="PlnEndDate" Type="date" />
     <Property Name="ActEndDate" Type="date" />
+    <Property Name="CompletionPer" Type="decimal" />
+    <Property Name="AuditStatus" Type="varchar" MaxLength="50" />
+    <Property Name="ModifiedDate" Type="date" />
+    <Property Name="ModifiedBy" Type="varchar" MaxLength="150" />
+    <Property Name="CreatedBy" Type="varchar" MaxLength="150" />
+    <Property Name="CreatedDate" Type="date" />
+  </EntityType>
+  <EntityType Name="ProjectPhaseHistory">
+    <Key>
+      <PropertyRef Name="PhaseID" />
+    </Key>
+    <Property Name="PhaseID" Type="int" Nullable="false" StoreGeneratedPattern="Identity" />
+    <Property Name="ProjectId" Type="int" />
+    <Property Name="DsrId" Type="int" />
+    <Property Name="PhaseName" Type="varchar" MaxLength="150" />
+    <Property Name="PlnSrtDate" Type="date" />
+    <Property Name="ActSrtDate" Type="date" />
+    <Property Name="PlnEndDate" Type="date" />
+    <Property Name="ActEndDate" Type="date" />
+    <Property Name="CompletionPer" Type="nchar" MaxLength="10" />
+    <Property Name="AuditStatus" Type="varchar" MaxLength="50" />
     <Property Name="ModifiedDate" Type="date" />
     <Property Name="ModifiedBy" Type="varchar" MaxLength="150" />
     <Property Name="CreatedBy" Type="varchar" MaxLength="150" />

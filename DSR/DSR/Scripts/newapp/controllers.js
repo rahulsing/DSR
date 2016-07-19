@@ -2,6 +2,7 @@
 angular.module('myApp.controllers', [])
   .controller('dsrController', function ($scope, MomService, $location, $routeParams, $rootScope) {
       $scope.title = "DSR Page";
+      
       $scope.tempindex = -1;
       $scope.ProjectPhases = [];
 
@@ -103,7 +104,7 @@ angular.module('myApp.controllers', [])
         //];
 
         $scope.projects = [];
-        function getProducts() {
+        function getProjects() {
             ProjectService.get().then(function (response) {
                 $scope.projects = response.data;
                 console.log(response);
@@ -112,7 +113,7 @@ angular.module('myApp.controllers', [])
             });
         };
         //call this funcation on page load
-        getProducts();
+        getProjects();
         console.log($scope.projects.length);
 
         //add project 
@@ -155,9 +156,145 @@ angular.module('myApp.controllers', [])
   
 })
     //this controller is to manage new dsr operation
-.controller('newDsrsController', function ($scope, ProjectService, $location, $routeParams, $rootScope, $filter) {
+.controller('newDsrsController', function ($scope, DSRService, $location, $routeParams, $rootScope, $filter) {
     //$scope.showName = $routeParams.projectid;
     $scope.title = 'Project: ' + $routeParams.projectId + ' - DSR History ';
     $scope.projectId = $routeParams.projectId;
+    $scope.message = "";
     console.log($routeParams.projectId);
+
+    $scope.projects = [];
+    $scope.tempindex = -1;
+    $scope.ProjectPhases = [];
+    $scope.selectedItem = "";
+    $scope.statusdata = [{ statusId: '1', statusName: 'Green' }, { statusId: '2', statusName: 'Yellow' }, { statusId: '3', statusName: 'Red' }];
+ 
+    $scope.selectedItem = $scope.statusdata[0].statusName;
+    //alert('Selected count ID: ' + $scope.statuselect);
+    $scope.onchange = function (id) {
+        console.log(id);
+        $scope.selectedItem =id.statusName;
+    }
+
+    //add task
+    $scope.addPhase = function () {
+        var projectPhase = {
+            ProjectId:$scope.projectId,
+            PhaseName: $scope.projectPhase,
+            PlnSrtDate: $scope.projectPlnStartDate,
+            PlnEndDate: $scope.projectPlnEndDate,
+            ActSrtDate: $scope.projectActStartDate,
+            ActEndDate: $scope.projectActEndDate,
+            CompletionPer: $scope.inputCompletion,
+            AuditStatus: $scope.projectAuditStatus
+        };
+        console.log(projectPhase);
+        if ($scope.projectPhase.length > 0) {
+            $scope.ProjectPhases.push(projectPhase);
+            console.log('$scope.ProjectPhases.lenght : ' + $scope.ProjectPhases.length);
+
+            //after insert clear input content
+            $scope.clearPhaseInputs();
+        }
+    };
+
+    //update comment
+    //this is to select the item from table to the input
+    $scope.selectPhase = function (projectPhase) {
+        //hold the index of temp phase for update
+        $scope.tempindex = $scope.ProjectPhases.indexOf(projectPhase);
+        console.log('$scope.tempindex ' + $scope.tempindex);
+        $scope.projectPhase = projectPhase.PhaseName;
+        $scope.projectPlnStartDate = projectPhase.PlnSrtDate;
+        $scope.projectPlnEndDate = projectPhase.PlnEndDate;
+        $scope.projectActStartDate = projectPhase.ActSrtDate;
+        $scope.projectActEndDate = projectPhase.ActEndDate;
+        $scope.inputCompletion = projectPhase.CompletionPer;
+        $scope.projectAuditStatus = projectPhase.AuditStatus;
+    };
+
+    $scope.updatePhase = function () {
+        var projectPhase = {
+            PhaseName: $scope.projectPhase,
+            PlnSrtDate: $scope.projectPlnStartDate,
+            PlnEndDate: $scope.projectPlnEndDate,
+            ActSrtDate: $scope.projectActStartDate,
+            ActEndDate: $scope.projectActEndDate,
+            CompletionPer: $scope.inputCompletion,
+            AuditStatus: $scope.projectAuditStatus
+        };
+        console.log('$scope.tempindex' + $scope.tempindex);
+        $scope.ProjectPhases[$scope.tempindex] = projectPhase;
+        //after udpate clear input content
+        $scope.clearPhaseInputs();
+
+    };
+
+    $scope.removePhase = function (projectPhase) {
+        //console.log(m);
+        var index = $scope.ProjectPhases.indexOf(projectPhase);
+        console.log(index);
+        $scope.ProjectPhases.splice(index, 1);
+    };
+
+    //clear the phase input text box
+    $scope.clearPhaseInputs = function () {
+        $scope.projectPhase = ""; $scope.projectPlnStartDate = ""; $scope.projectPlnEndDate = ""; $scope.projectActStartDate = ""; $scope.projectActEndDate = "";
+        $scope.inputCompletion = ""; $scope.projectAuditStatus = "";
+    };
+
+    //working with activity
+    $scope.Accomplishments = [];
+
+    $scope.addAccomplishments = function () {
+        //console.log(m);
+        var newAccomplishments = {
+            ProjectId:$scope.projectId,
+            Activity: $scope.accomplishmentName,
+            ActivityDate: $scope.accomplishmentDate
+        }
+        if ($scope.accomplishmentName.length > 0) {
+            $scope.Accomplishments.push(newAccomplishments);
+            console.log('$scope.Accomplishments.lenght : ' + $scope.Accomplishments.length);
+            //after insert clear input content
+            $scope.accomplishmentName = ""; $scope.accomplishmentDate = "";
+        }
+    };
+
+    $scope.removeAccomplishment = function (accomplishment) {
+        //console.log(m);
+        var index = $scope.Accomplishments.indexOf(accomplishment);
+        console.log('accomplishment to be removed at index : '+index);
+        $scope.Accomplishments.splice(index, 1);
+    };
+
+    //this funcation will get all the section from the Last DSR will be updated to be sent\
+    $scope.selected = $scope.statusdata[1]
+    var dsrvm = {
+        projectId: $scope.projectId,
+        projectStatus: $scope.selectedItem,
+        phases: $scope.ProjectPhases,
+        accomplishment: $scope.Accomplishments
+    };
+
+    $scope.postDsr = function () {
+        console.log(JSON.stringify(dsrvm));
+        console.log('Post: dsrvm - ' + $scope.projectId);
+        console.log('$scope.Accomplishments.lenght : ' + $scope.Accomplishments.length);
+        
+        //console.log('Post: dsrvm - ' + $scope.ProjectPhases);
+        //console.log('Post: dsrvm - $scope.ProjectPhases.lenght : ' + $scope.ProjectPhases.lenght);
+        //console.log('Post: dsrvm - $scope.Accomplishments.lenght : ' + $scope.Accomplishments.lenght);
+
+        DSRService.post(dsrvm).then(function (response) {
+            console.log('Post the dsr');
+            $scope.message = response.data;
+            $scope.message = "DSR Posted successfully";
+            $location.path('/projectdsrs/' + $scope.projectId);
+        }, function (err) {
+            alert(err);
+        })
+    };
+
+
 });

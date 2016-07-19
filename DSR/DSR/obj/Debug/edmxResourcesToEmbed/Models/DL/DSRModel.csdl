@@ -1,41 +1,88 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Schema Namespace="DSRdbModel" Alias="Self" p1:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:p1="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
   <EntityContainer Name="DSRdbEntities" p1:LazyLoadingEnabled="true">
+    <EntitySet Name="Accomplishments" EntityType="DSRdbModel.Accomplishment" />
+    <EntitySet Name="AccomplishmentsHistories" EntityType="DSRdbModel.AccomplishmentsHistory" />
     <EntitySet Name="Projects" EntityType="DSRdbModel.Project" />
     <EntitySet Name="ProjectPhases" EntityType="DSRdbModel.ProjectPhase" />
+    <EntitySet Name="ProjectPhaseHistories" EntityType="DSRdbModel.ProjectPhaseHistory" />
     <EntitySet Name="DSRMasters" EntityType="DSRdbModel.DSRMaster" />
   </EntityContainer>
+  <EntityType Name="Accomplishment">
+    <Key>
+      <PropertyRef Name="ActivityId" />
+    </Key>
+    <Property Type="Int32" Name="ActivityId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ProjectId" />
+    <Property Type="String" Name="Activity" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ActivityDate" Precision="0" />
+    <Property Type="DateTime" Name="AddedDate" Precision="0" />
+    <Property Type="String" Name="AddedBy" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
+  <EntityType Name="AccomplishmentsHistory">
+    <Key>
+      <PropertyRef Name="ActivityId" />
+    </Key>
+    <Property Type="Int32" Name="ActivityId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ProjectId" />
+    <Property Type="String" Name="Activity" MaxLength="500" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ActivityDate" Precision="0" />
+    <Property Type="DateTime" Name="AddedDate" Precision="0" />
+    <Property Type="String" Name="AddedBy" MaxLength="50" FixedLength="false" Unicode="false" />
+  </EntityType>
   <EntityType Name="Project">
     <Key>
       <PropertyRef Name="ProjectID" />
     </Key>
-    <Property Name="ProjectID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-    <Property Name="ProjectName" Type="String" MaxLength="100" Unicode="false" FixedLength="false" />
-    <Property Name="PlnSrtDate" Type="DateTime" Precision="0" />
-    <Property Name="ActSrtDate" Type="DateTime" Precision="0" />
-    <Property Name="PlnEndDate" Type="DateTime" Precision="0" />
-    <Property Name="ActEndDate" Type="DateTime" Precision="0" />
-    <Property Name="ProjectDL" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
-    <Property Name="PM" Type="String" MaxLength="10" Unicode="true" FixedLength="true" />
-    <Property Name="LastDSR" Type="DateTime" Precision="0" />
-    <Property Name="CreatedBy" Type="String" MaxLength="50" Unicode="false" FixedLength="false" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Type="Int32" Name="ProjectID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="String" Name="ProjectName" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="PlnSrtDate" Precision="0" />
+    <Property Type="DateTime" Name="ActSrtDate" Precision="0" />
+    <Property Type="DateTime" Name="PlnEndDate" Precision="0" />
+    <Property Type="DateTime" Name="ActEndDate" Precision="0" />
+    <Property Type="String" Name="ProjectDL" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="PM" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Type="DateTime" Name="LastDSR" Precision="0" />
+    <Property Type="String" Name="CreatedBy" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="0" />
   </EntityType>
   <EntityType Name="ProjectPhase">
     <Key>
       <PropertyRef Name="PhaseID" />
     </Key>
-    <Property Name="PhaseID" Type="Int32" Nullable="false" p1:StoreGeneratedPattern="Identity" />
-    <Property Name="DsrId" Type="Int32" />
-    <Property Name="PhaseName" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
-    <Property Name="PlnSrtDate" Type="DateTime" Precision="0" />
-    <Property Name="ActSrtDate" Type="DateTime" Precision="0" />
-    <Property Name="PlnEndDate" Type="DateTime" Precision="0" />
-    <Property Name="ActEndDate" Type="DateTime" Precision="0" />
-    <Property Name="ModifiedDate" Type="DateTime" Precision="0" />
-    <Property Name="ModifiedBy" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
-    <Property Name="CreatedBy" Type="String" MaxLength="150" Unicode="false" FixedLength="false" />
-    <Property Name="CreatedDate" Type="DateTime" Precision="0" />
+    <Property Type="Int32" Name="PhaseID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ProjectId" />
+    <Property Type="Int32" Name="DsrId" />
+    <Property Type="String" Name="PhaseName" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="PlnSrtDate" Precision="0" />
+    <Property Type="DateTime" Name="ActSrtDate" Precision="0" />
+    <Property Type="DateTime" Name="PlnEndDate" Precision="0" />
+    <Property Type="DateTime" Name="ActEndDate" Precision="0" />
+    <Property Type="Decimal" Name="CompletionPer" Precision="18" Scale="0" />
+    <Property Type="String" Name="AuditStatus" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="0" />
+    <Property Type="String" Name="ModifiedBy" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CreatedBy" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="0" />
+  </EntityType>
+  <EntityType Name="ProjectPhaseHistory">
+    <Key>
+      <PropertyRef Name="PhaseID" />
+    </Key>
+    <Property Type="Int32" Name="PhaseID" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Type="Int32" Name="ProjectId" />
+    <Property Type="Int32" Name="DsrId" />
+    <Property Type="String" Name="PhaseName" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="PlnSrtDate" Precision="0" />
+    <Property Type="DateTime" Name="ActSrtDate" Precision="0" />
+    <Property Type="DateTime" Name="PlnEndDate" Precision="0" />
+    <Property Type="DateTime" Name="ActEndDate" Precision="0" />
+    <Property Type="String" Name="CompletionPer" MaxLength="10" FixedLength="true" Unicode="true" />
+    <Property Type="String" Name="AuditStatus" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="ModifiedDate" Precision="0" />
+    <Property Type="String" Name="ModifiedBy" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="CreatedBy" MaxLength="150" FixedLength="false" Unicode="false" />
+    <Property Type="DateTime" Name="CreatedDate" Precision="0" />
   </EntityType>
   <EntityType Name="DSRMaster">
     <Key>
@@ -44,11 +91,11 @@
     <Property Type="Int32" Name="DSRId" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Type="Int32" Name="ProjectId" />
     <Property Type="String" Name="CurrentPhase" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="DateTime" Name="DSRDate" Precision="0" />
-    <Property Type="String" Name="Status" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="String" Name="SentBy" MaxLength="50" FixedLength="false" Unicode="false" />
-    <Property Type="Int32" Name="Issue" />
-    <Property Type="Int32" Name="Risk" />
-    <Property Type="Int32" Name="OpenItem" />
+    <Property Type="DateTime" Name="DSRDate" Nullable="false" Precision="0" />
+    <Property Type="String" Name="Status" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="String" Name="SentBy" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Type="Int32" Name="Issue" Nullable="false" />
+    <Property Type="Int32" Name="Risk" Nullable="false" />
+    <Property Type="Int32" Name="OpenItem" Nullable="false" />
   </EntityType>
 </Schema>

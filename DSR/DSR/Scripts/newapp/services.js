@@ -85,4 +85,23 @@ angular.module('myApp.services', []).service('MomService', function ($http) {
         });
         return request;
     }
+})
+.service('DSRService', function ($http) {
+    this.getLastDSR = function () {
+        var request = $http({
+            method: "get",
+            url: "/api/Project/",
+        });
+        return request;
+    }
+
+    this.post = function (dsrvm) {
+        var request = $http({
+            method: "post",
+            url: "/api/DSR/",
+            data: dsrvm
+        });
+        return request;
+    }
+
 });

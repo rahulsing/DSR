@@ -6,11 +6,29 @@
         $("#inputPlnEndDate").datepicker();
         $("#inputActStartDate").datepicker();
         $("#inputActEndDate").datepicker();
+        $("#actdate").datepicker();
     });
 </script>
 <div ng-controller="newDsrsController">
     <h2>{{title}}</h2>
-    <h1>length: {{$scope.ProjectPhases.length}}</h1>
+    <h3>{{$scope.message}}</h3>
+
+    <div class="row">
+        <div class="col-md-2">
+            <label for="singleSelect" class="lbl">Single Status: </label>
+        </div>
+        <div class="col-md-2">
+
+            <select ng-model="statuselect" class="form-control"
+                ng-options="status.statusId as status.statusName for status in statusdata" ng-change="onchange(statusdata[statuselect-1])">
+            </select>
+
+        </div>
+
+    </div>
+    <br>
+
+
     <table cellspacing="0" class="table table-condensed  table-bordered table-hover" id="phaseTable" style="width: 100%; border-collapse: collapse;">
         <tr>
             <th>S. No.</th>
@@ -26,52 +44,53 @@
         <tr>
             <!--<td style="width: 40px;">1</td>
                  placeholder="yyyy-MM-dd" min="2015-01-01" max="2020-12-31" -->
-                <td><input type="hidden" disabled="disabled" ng-model="projectPhaseid" /></td>
-                <td>
-                    <input name="inputPhase" type="text" id="inputPhase" ng-model="projectPhase" class="form-control input-sm" />
-                </td>
-                <td>
-                    <input name="inputPlnStartDate" type="text" id="inputPlnStartDate" ng-model="projectPlnStartDate" class="form-control input-sm" />
-                </td>
-                <td>
-                    <input name="inputPlnEndDate" type="text" id="inputPlnEndDate" ng-model="projectPlnEndDate" class="form-control input-sm" />
-                </td>
-                <td>
-                    <input name="inputActStartDate" type="text" id="inputActStartDate" ng-model="projectActStartDate" class="form-control input-sm" />
-                </td>
-                <td>
-                    <input name="inputActEndDate" type="text" id="inputActEndDate" ng-model="projectActEndDate" class="form-control input-sm" />
-                </td>
-                <td>
-                    <input name="inputCompletion" type="number" min="0" max="99" id="inputCompletion" ng-model="inputCompletion" class="form-control input-sm" />
-                </td>
-                <td>
-                    <input name="inputAuditStatus" type="text" id="inputAuditStatus" ng-model="projectAuditStatus" class="form-control input-sm" />
-                </td>
-                <td>
-                    <button ng-click="updatePhase()" class="btn btn-primary">
-                        <span class="glyphicon glyphicon-ok"></span>
-                    </button>
-                    <button ng-click="addPhase()" class="btn btn-success">
-                        <span class="glyphicon glyphicon-plus-sign"></span>
-                    </button>
-                </td>
+            <td>
+                <input type="hidden" disabled="disabled" ng-model="projectPhaseid" /></td>
+            <td>
+                <input name="inputPhase" type="text" id="inputPhase" ng-model="projectPhase" class="form-control input-sm" />
+            </td>
+            <td>
+                <input name="inputPlnStartDate" type="text" id="inputPlnStartDate" ng-model="projectPlnStartDate" class="form-control input-sm" />
+            </td>
+            <td>
+                <input name="inputPlnEndDate" type="text" id="inputPlnEndDate" ng-model="projectPlnEndDate" class="form-control input-sm" />
+            </td>
+            <td>
+                <input name="inputActStartDate" type="text" id="inputActStartDate" ng-model="projectActStartDate" class="form-control input-sm" />
+            </td>
+            <td>
+                <input name="inputActEndDate" type="text" id="inputActEndDate" ng-model="projectActEndDate" class="form-control input-sm" />
+            </td>
+            <td>
+                <input name="inputCompletion" type="number" min="0" max="99" id="inputCompletion" ng-model="inputCompletion" class="form-control input-sm" />
+            </td>
+            <td>
+                <input name="inputAuditStatus" type="text" id="inputAuditStatus" ng-model="projectAuditStatus" class="form-control input-sm" />
+            </td>
+            <td>
+                <button ng-click="updatePhase()" class="btn btn-primary">
+                    <span class="glyphicon glyphicon-ok"></span>
+                </button>
+                <button ng-click="addPhase()" class="btn btn-success">
+                    <span class="glyphicon glyphicon-plus-sign"></span>
+                </button>
+            </td>
         </tr>
         <tr ng-repeat="phase in ProjectPhases">
             <!--<td style="width: 40px;">1</td>-->
-            <td ><span>{{rowRenderIndex+1}}</span></td>
-            <td>{{phase.projectPhase}}
+            <td><span>{{rowRenderIndex+1}}</span></td>
+            <td>{{phase.PhaseName}}
             </td>
-            <td>{{phase.projectPlnStartDate}}</td>
-            <td>{{phase.projectPlnEndDate}}
+            <td>{{phase.PlnSrtDate}}</td>
+            <td>{{phase.PlnEndDate}}
             </td>
-            <td>{{phase.projectActStartDate}}
+            <td>{{phase.ActSrtDate}}
             </td>
-            <td>{{phase.projectActEndDate}}
+            <td>{{phase.ActEndDate}}
             </td>
-            <td>{{phase.inputCompletion}}
+            <td>{{phase.CompletionPer}}
             </td>
-            <td>{{phase.projectAuditStatus}}
+            <td>{{phase.AuditStatus}}
             </td>
             <td>
                 <button ng-click="selectPhase(phase)" class="btn btn-warning">
@@ -84,41 +103,38 @@
         </tr>
 
         <tr>
-            <td colspan="12">
-                <div>
-                    <div class="col-sm-offset-2 col-sm-10">
-                        <button type="submit" class="btn btn-success" ng-click="save()">Submit</button>
-                    </div>
-                </div>
-            </td>
+            <td colspan="12"></td>
         </tr>
         <!--end item display-->
     </table>
 
-       <div class="row">
+    <div class="row">
         <span><u>Summary of Key Activities/Milestones completed till now:</u></span>
         <div class="input-group">
-            <form class="form-inline" role="form" ng-submit="addActivity()">
+            <form class="form-inline" role="form" ng-submit="addAccomplishments()">
                 <div class="col-md-4">
-                    <input type="text" class="form-control" id="actname" ng-model="activityname" />
+                    <input type="text" class="form-control" id="actname" ng-model="accomplishmentName" />
                 </div>
                 <div class="col-md-4">
-                    <input type="text" class="form-control jcalender" id="actdate" ng-model="activityDate" />
+                    <input type="text" class="form-control" id="actdate" ng-model="accomplishmentDate" />
                 </div>
                 <div class="col-md-4">
                     <span class="input-group-btn">
-                        @*<button class="btn btn-default" type="button" id="addactivity">Go!</button>*@
                         <input type="submit" value="Add" class="btn btn-primary" />
                     </span>
                 </div>
             </form>
         </div>
-        
+
         <div class="message">
-            <ul ng-repeat="activity in activities">
-                <li>{{activity.activityname}} - {{activity.activityDate}}
-                    <input type="submit" value="X" class="btn btn-info" ng-click="removeActivity(activity)" /></li>
+            <ul ng-repeat="accomplishment in Accomplishments">
+                <li>{{accomplishment.Activity}} - {{accomplishment.ActivityDate}}
+                    <input type="submit" value="X" class="btn btn-info" ng-click="removeAccomplishment(accomplishment)" /></li>
             </ul>
         </div>
+    </div>
+
+    <div class="col-sm-offset-2 col-sm-10">
+        <button type="submit" class="btn btn-success" ng-click="postDsr()">Save</button>
     </div>
 </div>

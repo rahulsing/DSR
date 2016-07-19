@@ -12,7 +12,7 @@ namespace DSR.Models.DL
     using System;
     using System.Collections.Generic;
     
-    public partial class ProjectPhase
+    public partial class ProjectPhaseHistory
     {
         public int PhaseID { get; set; }
         public Nullable<int> ProjectId { get; set; }
@@ -22,7 +22,7 @@ namespace DSR.Models.DL
         public Nullable<System.DateTime> ActSrtDate { get; set; }
         public Nullable<System.DateTime> PlnEndDate { get; set; }
         public Nullable<System.DateTime> ActEndDate { get; set; }
-        public Nullable<decimal> CompletionPer { get; set; }
+        public string CompletionPer { get; set; }
         public string AuditStatus { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ModifiedBy { get; set; }

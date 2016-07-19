@@ -12,16 +12,13 @@ namespace DSR.Models.DL
     using System;
     using System.Collections.Generic;
     
-    public partial class DSRMaster
+    public partial class AccomplishmentsHistory
     {
-        public int DSRId { get; set; }
+        public int ActivityId { get; set; }
         public Nullable<int> ProjectId { get; set; }
-        public string CurrentPhase { get; set; }
-        public System.DateTime DSRDate { get; set; }
-        public string Status { get; set; }
-        public string SentBy { get; set; }
-        public int Issue { get; set; }
-        public int Risk { get; set; }
-        public int OpenItem { get; set; }
+        public string Activity { get; set; }
+        public Nullable<System.DateTime> ActivityDate { get; set; }
+        public Nullable<System.DateTime> AddedDate { get; set; }
+        public string AddedBy { get; set; }
     }
 }

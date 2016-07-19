@@ -162,11 +162,19 @@
     <Compile Include="Areas\HelpPage\SampleGeneration\SampleDirection.cs" />
     <Compile Include="Areas\HelpPage\SampleGeneration\TextSample.cs" />
     <Compile Include="Areas\HelpPage\XmlDocumentationProvider.cs" />
+    <Compile Include="Controllers\DSRController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ProjectController.cs" />
     <Compile Include="Controllers\ValuesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DailyDSRVM.cs" />
+    <Compile Include="Models\DL\Accomplishment.cs">
+      <DependentUpon>DSRModel.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Models\DL\AccomplishmentsHistory.cs">
+      <DependentUpon>DSRModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Models\DL\DSRMaster.cs">
       <DependentUpon>DSRModel.tt</DependentUpon>
@@ -193,6 +201,9 @@
     <Compile Include="Models\DL\ProjectPhase.cs">
       <DependentUpon>DSRModel.tt</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\DL\ProjectPhaseHistory.cs">
+      <DependentUpon>DSRModel.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

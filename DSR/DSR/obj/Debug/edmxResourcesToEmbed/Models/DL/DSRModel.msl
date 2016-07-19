@@ -1,37 +1,84 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
   <EntityContainerMapping StorageEntityContainer="DSRdbModelStoreContainer" CdmEntityContainer="DSRdbEntities">
+    <EntitySetMapping Name="Accomplishments">
+      <EntityTypeMapping TypeName="DSRdbModel.Accomplishment">
+        <MappingFragment StoreEntitySet="Accomplishments">
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
+          <ScalarProperty Name="Activity" ColumnName="Activity" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="AccomplishmentsHistories">
+      <EntityTypeMapping TypeName="DSRdbModel.AccomplishmentsHistory">
+        <MappingFragment StoreEntitySet="AccomplishmentsHistory">
+          <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+          <ScalarProperty Name="AddedDate" ColumnName="AddedDate" />
+          <ScalarProperty Name="ActivityDate" ColumnName="ActivityDate" />
+          <ScalarProperty Name="Activity" ColumnName="Activity" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="ActivityId" ColumnName="ActivityId" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
     <EntitySetMapping Name="Projects">
       <EntityTypeMapping TypeName="DSRdbModel.Project">
         <MappingFragment StoreEntitySet="Project">
-          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
-          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
-          <ScalarProperty Name="PlnSrtDate" ColumnName="PlnSrtDate" />
-          <ScalarProperty Name="ActSrtDate" ColumnName="ActSrtDate" />
-          <ScalarProperty Name="PlnEndDate" ColumnName="PlnEndDate" />
-          <ScalarProperty Name="ActEndDate" ColumnName="ActEndDate" />
-          <ScalarProperty Name="ProjectDL" ColumnName="ProjectDL" />
-          <ScalarProperty Name="PM" ColumnName="PM" />
-          <ScalarProperty Name="LastDSR" ColumnName="LastDSR" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="LastDSR" ColumnName="LastDSR" />
+          <ScalarProperty Name="PM" ColumnName="PM" />
+          <ScalarProperty Name="ProjectDL" ColumnName="ProjectDL" />
+          <ScalarProperty Name="ActEndDate" ColumnName="ActEndDate" />
+          <ScalarProperty Name="PlnEndDate" ColumnName="PlnEndDate" />
+          <ScalarProperty Name="ActSrtDate" ColumnName="ActSrtDate" />
+          <ScalarProperty Name="PlnSrtDate" ColumnName="PlnSrtDate" />
+          <ScalarProperty Name="ProjectName" ColumnName="ProjectName" />
+          <ScalarProperty Name="ProjectID" ColumnName="ProjectID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
     <EntitySetMapping Name="ProjectPhases">
       <EntityTypeMapping TypeName="DSRdbModel.ProjectPhase">
         <MappingFragment StoreEntitySet="ProjectPhase">
-          <ScalarProperty Name="PhaseID" ColumnName="PhaseID" />
-          <ScalarProperty Name="DsrId" ColumnName="DsrId" />
-          <ScalarProperty Name="PhaseName" ColumnName="PhaseName" />
-          <ScalarProperty Name="PlnSrtDate" ColumnName="PlnSrtDate" />
-          <ScalarProperty Name="ActSrtDate" ColumnName="ActSrtDate" />
-          <ScalarProperty Name="PlnEndDate" ColumnName="PlnEndDate" />
-          <ScalarProperty Name="ActEndDate" ColumnName="ActEndDate" />
-          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
-          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
-          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
           <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="AuditStatus" ColumnName="AuditStatus" />
+          <ScalarProperty Name="CompletionPer" ColumnName="CompletionPer" />
+          <ScalarProperty Name="ActEndDate" ColumnName="ActEndDate" />
+          <ScalarProperty Name="PlnEndDate" ColumnName="PlnEndDate" />
+          <ScalarProperty Name="ActSrtDate" ColumnName="ActSrtDate" />
+          <ScalarProperty Name="PlnSrtDate" ColumnName="PlnSrtDate" />
+          <ScalarProperty Name="PhaseName" ColumnName="PhaseName" />
+          <ScalarProperty Name="DsrId" ColumnName="DsrId" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="PhaseID" ColumnName="PhaseID" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="ProjectPhaseHistories">
+      <EntityTypeMapping TypeName="DSRdbModel.ProjectPhaseHistory">
+        <MappingFragment StoreEntitySet="ProjectPhaseHistory">
+          <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+          <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+          <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+          <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+          <ScalarProperty Name="AuditStatus" ColumnName="AuditStatus" />
+          <ScalarProperty Name="CompletionPer" ColumnName="CompletionPer" />
+          <ScalarProperty Name="ActEndDate" ColumnName="ActEndDate" />
+          <ScalarProperty Name="PlnEndDate" ColumnName="PlnEndDate" />
+          <ScalarProperty Name="ActSrtDate" ColumnName="ActSrtDate" />
+          <ScalarProperty Name="PlnSrtDate" ColumnName="PlnSrtDate" />
+          <ScalarProperty Name="PhaseName" ColumnName="PhaseName" />
+          <ScalarProperty Name="DsrId" ColumnName="DsrId" />
+          <ScalarProperty Name="ProjectId" ColumnName="ProjectId" />
+          <ScalarProperty Name="PhaseID" ColumnName="PhaseID" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>
